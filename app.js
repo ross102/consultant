@@ -1,3 +1,4 @@
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -19,8 +20,8 @@ const paymentRouter = require('./routes/payment');
 const app = express();
 
 //connect to database
-const mongoDb = 'mongodb://localhost:27017/fred';
-mongoose.connect(mongoDb, {
+
+mongoose.connect(process.env.DATABASEURL, {
 	useNewUrlParser: true,
 	useCreateIndex: true
 });

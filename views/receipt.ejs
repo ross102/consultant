@@ -2,23 +2,21 @@
 
 
 
-<div class="container" id="reg">
+<div class="container" id="flash">
     <div class="row">
-            <h3>  Details </h3>
         <div class="col-md-6 col-sm-4">
+                <h3>  Details </h3>
             <div class="form-control">
               <label> Name:   <%= donors.full_name %> </label>
             </div>
             <div class="form-control">
-              <label> Amount Paid: <%= donors.amount.toString().substring(0, donors.amount.length-2) %>  </label>
+              <label> Amount Paid: <%= donors.amount %>  </label>
             </div>
             <div class="form-control">
-              <label> Amount Paid: <%= donors.email %> </label>
+              <label> : <%= donors.email %> </label>
             </div>
 
-           <div>
-                <b> Thanks for your donation </b>
-           </div>
+          <h6>Thanks for your donation </h6>
         </div>
         
     </div>

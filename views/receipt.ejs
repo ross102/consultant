@@ -1,22 +1,29 @@
 <% include ./partials/header  %>
 
-<h1> Payment details </h1>
 
-<div class="container">
+
+<div class="container" id="reg">
     <div class="row">
+            <h3>  Details </h3>
         <div class="col-md-6 col-sm-4">
-            <label> Name: <%= donors.full_name %> </label>
-            <label> Amount Paid: <%= donors.amount %> (last two zeros are in kobo) </label>
-            <label> Amount Paid: <%= donors.email %> </label>
+            <div class="form-control">
+              <label> Name:   <%= donors.full_name %> </label>
+            </div>
+            <div class="form-control">
+              <label> Amount Paid: <%= donors.amount.toString().substring(0, donors.amount.length-2) %>  </label>
+            </div>
+            <div class="form-control">
+              <label> Amount Paid: <%= donors.email %> </label>
+            </div>
+
+           <div>
+                <b> Thanks for your donation </b>
+           </div>
         </div>
-        <b> Thanks for your donation </b>
+        
     </div>
 </div>
 
- <b> Name: </b> <%= donors.full_name %>
- <b> Amount paid: </b> <%= donors.amount %>
- <b> Email address: </b> <%= donors.email %>
-
- <b> Thanks for your donation </b>
+ 
 
 <% include ./partials/footer  %>

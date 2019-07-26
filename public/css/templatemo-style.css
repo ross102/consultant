@@ -299,7 +299,15 @@ https://templatemo.com/tm-516-known
     display: inline-block;
     margin-right: 5px;
   }
+.custom-navbar .navbar-nav-first .dropdown:hover > .dropdown-menu {
+  display: block;
+}
 
+@media (min-width: 700px) {
+  .custom-navbar .navbar-nav-first .dropdown:hover > .dropdown-menu {
+    display: block;
+  }
+}
   .custom-navbar .nav li a {
     line-height: 40px;
     color: #575757;

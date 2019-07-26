@@ -1,0 +1,34 @@
+<% include ./partials/header  %>
+
+
+<div class="container" >
+        <h3  id="reg">Make A Donation</h3>
+    <div class="row">
+           <div class="col-md-6 col-sm-4">
+                <form action="/paystack/pay" method="POST">
+                    <div class="form-group">
+                    <input type="text"   class="form-control" name="full_name" placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                    <input type="text"   class="form-control" name="email" placeholder=" Your valid email">
+                    </div>
+                    <div class="form-group">
+                    <input type="number" class="form-control" name="amount" placeholder="amount" min="50">
+                    </div>	
+                    <!-- <p class="help-block">Example block-level help text here.</p> -->
+                    <input type="submit" value="Donate" class="btn btn-primary">
+                </form>
+           </div> 
+           <div class="col-md-6 col-sm-4">
+               <img src="/images/brief1.png" style="float: right" class="img-responsive" alt="" />
+           </div>
+    </div>
+</div>
+<div class="container" id="reg">
+    
+</div>
+
+
+
+
+<% include ./partials/footer  %>

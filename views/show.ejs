@@ -1,0 +1,48 @@
+<% include ./partials/header  %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-sm-4">
+            <div>
+             <img src="<%= post.image.secure_url %>" class="img-responsive" alt="">
+            </div>
+               <div class="courses-date">
+                 <span><i class="fa fa-calendar"></i> <%=  post.created.toDateString()  %></span>
+                </div>
+                <div class="courses-detail">
+                 <h3><a href="#"><%=  post.title      %></a></h3>
+                 <p><%=  post.desc      %></p>
+                </div>  
+                <div class="courses-info">
+                 <div class="courses-author">
+                    <span>posted by <%=  post.author.username   %></span>
+                </div> 
+                 <div>
+                   <a href="/post/<%= post.id %>/edit"> Edit your post</a>
+                </div>
+                <div>
+                  <form action="/post/<%= post.id %>?_method=DELETE" method="POST">
+                    <button >Delete</button>
+                  </form>  
+                </div>
+        </div>
+        <div class="well well-lg">
+                <% post.comments.forEach(function(comment) { %>
+                <div class="well">
+                        <div> <%= comment.author.username %> </div>
+                        <div> <%= comment.text    %> </div>
+                        <div class="courses-author">
+                          <img src="<%= comment.author.image.secure_url %>"> 
+                        </div>
+                </div>
+                <% }) %>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" id="reg">
+  </div>
+
+  

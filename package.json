@@ -20,7 +20,7 @@
 		"heroku": "^7.26.2",
 		"lodash": "^4.17.14",
 		"method-override": "^3.0.0",
-		"mongoose": "^5.4.7",
+		"mongoose": "^5.1.4",
 		"mongoose-paginate": "^5.0.3",
 		"multer": "^1.4.1",
 		"multer-storage-cloudinary": "^2.2.1",

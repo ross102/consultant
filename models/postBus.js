@@ -9,14 +9,16 @@ const PostBusSchema = new Schema({
 		secure_url: { type: String, default: '/images/img1.jpg' },
 		public_id: String
 	},
-	author:  {
+	author: {
 		type: Schema.Types.ObjectId,
 		ref: 'User'
 	},
-	comments: [ {
-		type: Schema.Types.ObjectId,
-		ref: 'Comment'
-	}],
+	comments: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Buscomment'
+		}
+	],
 	created: { type: Date, default: Date.now }
 });
 

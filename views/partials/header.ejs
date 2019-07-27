@@ -32,12 +32,12 @@
             <!-- MENU LINKS -->
             <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-nav-first">
-                         <li><a href="/" class="smoothScroll">Home</a></li>
-                         <li><a href="/register" class="smoothScroll">Join The Team</a></li>
-                         <li><a href="/" class="smoothScroll">Request A Job</a></li>
+                         <li><a href="/" >Home</a></li>
+                         <li><a href="/register">Join The Team</a></li>
+                         <li><a href="/" >Request A Job</a></li>
                          <li class="dropdown">
-                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                         aria-haspopup="true" aria-expanded="false">More</a>
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-target=".dropdown" role="button"
+                         aria-haspopup="true" aria-expanded="false">More<span class="caret"></span></a>
                          <ul class="dropdown-menu">
                            <li><a href="/postBus">Projects </a></li>
                            <li><a href="/login">Sign in</a></li>
@@ -49,16 +49,20 @@
                          <% if( currentUser && currentUser.username.length > 0)  { %>
                          <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                          aria-haspopup="true" aria-expanded="false"> signed in as <%= currentUser.username %>  </a>
+                          aria-haspopup="true" aria-expanded="false"> signed in as <%= currentUser.username %><span class="caret"></span>  </a>
                           <ul class="dropdown-menu">
                           <li><a href="/postBus/new">Create a business idea </a></li>
                           <li><a href="/post/new">Create an Article</a></li>
-                          <li><a href="/postPdf/newPdf">Upload a document</a></li>
+                         
                           <li><a href="#">Search</a></li>
                           <li><a href="/logout">Logout</a></li>
+                          <%  }  %>
+                          <% if( currentUser && currentUser.isAdmin === true )  { %>
+                          <li><a href="/postPdf/newPdf">Upload a document</a></li>
+                          <%  }  %>
                           </ul>
                           </li>
-                         <%  }  %>
+                        
                     </ul>
                </div>
             </div>

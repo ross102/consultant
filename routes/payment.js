@@ -12,27 +12,29 @@ router.get('/pay', (req, res) => {
 
 router.post('/pay', (req, res) => {
 	if (req.body === '' || req.body.email.length < 7) {
-		req.flash('error', 'Please enter the correct details');
+		res.render('payForm', { error: 'Please enter the correct details' });
+	} else {
+		req.body.amount;
+		const form = {
+			full_name: req.body.full_name,
+			email: req.body.email,
+			amount: req.body.amount
+		};
+		form.metadata = {
+			full_name: form.full_name
+		};
+		form.amount *= 100;
+		initializePayment(form, (error, body) => {
+			if (error) {
+				//handle errors
+				res.status(400).send('something went wrong');
+				console.log(error);
+				return;
+			}
+			response = JSON.parse(body);
+			res.redirect(response.data.authorization_url);
+		});
 	}
-	const form = {
-		full_name: req.body.full_name,
-		email: req.body.email,
-		amount: req.body.amount
-	};
-	form.metadata = {
-		full_name: form.full_name
-	};
-	form.amount *= 100;
-	initializePayment(form, (error, body) => {
-		if (error) {
-			//handle errors
-			res.status(400).send('something went wrong');
-			console.log(error);
-			return;
-		}
-		response = JSON.parse(body);
-		res.redirect(response.data.authorization_url);
-	});
 });
 
 router.get('/callback', (req, res) => {
@@ -46,7 +48,7 @@ router.get('/callback', (req, res) => {
 		console.log(response);
 		const data = {
 			reference: response.data.reference,
-			amount: response.data.amount,
+			amount: response.data.amount * 0.01,
 			email: response.data.customer.email,
 			full_name: response.data.metadata.full_name
 		};

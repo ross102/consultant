@@ -16,7 +16,7 @@
                        <div class="item item-first">
                             <div class="caption">
                                  <div class="container">
-                                      <div class="col-md-6 col-sm-12">
+                                      <div class="col-md-12 col-sm-12">
                                          <h1> Write Your Dreams Down</h1>
                                          <h2>Dreams And Nightmares</h2>
                                          <a href="/post" class="section-btn btn btn-default smoothScroll">view  more</a>
@@ -27,7 +27,7 @@
                        <div class="item item-second">
                             <div class="caption">
                                  <div class="container">
-                                      <div class="col-md-6 col-sm-12">
+                                      <div class="col-md-12 col-sm-12">
                                            <h1>Your Idea Is An Answer</h1>
                                            <h3>Together We Are challengingly Creative</h3>
                                            <a href="/postBus" class="section-btn btn btn-default smoothScroll">Request for a consultant</a>
@@ -38,7 +38,7 @@
                        <div class="item item-third">
                             <div class="caption">
                                  <div class="container">
-                                      <div class="col-md-6 col-sm-12">
+                                      <div class="col-md-12 col-sm-12">
                                            <h1>Bringing Ideas To Life</h1>
                                            <h3> SeaOfApps - Minning Ideas  </h3>
                                            <a href="/register" class="section-btn btn btn-default smoothScroll"> Register</a>
@@ -55,14 +55,13 @@
           <div class="container">
                <div class="row">
 
-                    <div class="col-md-12 col-sm-12">
                          <div class="section-title">
                               <h2 id="changeColor">Most Recent Articles <small>Get inspired with inspiring quotes</small></h2>
                          </div>
                       
                          <div class="owl-carousel owl-theme owl-courses">
                                    <% posts.forEach(function(post) { %>
-                              <div class="col-md-4 col-sm-4">
+                              <div class="col-md-12 col-sm-12">
                                    <div class="item">
                                         <div class="courses-thumb">
                                              <div class="courses-top">
@@ -76,7 +75,7 @@
 
                                              <div class="courses-detail">
                                                   <h3><a href="#"><%=  post.title      %></a></h3>
-                                                  <p><%=  post.desc.substring(110)       %><a href="/post/<%= post.id %>"> Read more</a></p>
+                                                  <p><%=  post.desc.substring(0, 110)       %></p>
                                              </div>
 
                                              <div class="courses-info">
@@ -93,7 +92,7 @@
                               </div>
                               <%  }) %>
                          </div>
-                    </div>            
+                             
           </div>
      </section>
 
@@ -102,7 +101,7 @@
           <div class="container">
                <div class="row">
           
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-md-4 col-sm-4">
                          <div class="feature-thumb">
                               <span> 01 </span>
                               <h3>Inspiring Reads</h3>
@@ -111,7 +110,7 @@
                          </div>
                     </div>
 
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-md-4 col-sm-4">
                          <div class="feature-thumb">
                               <span>02</span>
                               <h3>Books & Library</h3>
@@ -120,7 +119,7 @@
                          </div>
                     </div>
 
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-md-4 col-sm-4">
                          <div class="feature-thumb">
                               <span>03</span>
                               <h3>Business Projects</h3>
@@ -145,7 +144,7 @@
      
                               <div class="owl-carousel owl-theme owl-courses">
                                         <% postBus.forEach(function(post) { %>
-                                             <div class="col-md-4 col-sm-4">
+                                             <div class="col-md-12 col-sm-12">
                                                   <div class="item">
                                                        <div class="courses-thumb">
                                                             <div class="courses-top">
@@ -159,7 +158,7 @@
                
                                                             <div class="courses-detail">
                                                                  <h3><a href="#"><%=  post.title      %></a></h3>
-                                                                 <p><%=  post.desc.substring(110)      %> <a href="/postBus/<%= post.id %>">Read more</a></p>
+                                                                 <p><%=  post.desc.substring(0, 110)      %> </p>
                                                             </div>
                
                                                             <div class="courses-info">
@@ -168,7 +167,7 @@
                                                                       <span>posted by <%=  post.author.username   %></span>
                                                                  </div>
                                                                  <div class="courses-price">
-                                                                      <a href="/postBus/<%= postBus.id %>"><span>Read more</span></a>
+                                                                      <a href="/postBus/<%= post.id %>"><span>Read more</span></a>
                                                                  </div>
                                                             </div>
                                                        </div>
@@ -185,7 +184,7 @@
           <div class="container">
                <div class="row">
 
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-4">
                          <div class="about-info">
                               <h2> Insights </h2>
                               
@@ -225,7 +224,7 @@
                          </div>
                     </div>
                     
-                     <div class="col-md-offset-1 col-md-4 col-sm-12"> 
+                     <div class="col-md-offset-1 col-md-4 col-sm-4"> 
                           <h6 id="seaText">Swim in The Ocean Of Ideas And Creativity <h6> <br />
                           <img src="/images/sea2.jpeg" id="sea" alt="">
                     </div>
@@ -238,13 +237,13 @@
      <section id="team">
           <div class="container">
                <div class="row">
-                    <div class="col-md-12 col-sm-12">
+                    <div class="col-md-12 col-sm-4">
                          <div class="section-title">
                               <h2>Partners <small>Meet Team members</small></h2>
                          </div>
                     </div>
 
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-4">
                               <div class="team-info">
                                    <h3>Nonso </h3>
                                    <span>I love Assisting Others</span>
@@ -257,7 +256,7 @@
                          </div>
                     
 
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-4">
                               <div class="team-info">
                                    <h3>Chimdi</h3>
                                    <span>knowledge is the key!</span>
@@ -269,7 +268,7 @@
                          </div>
                     
 
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-4">
                               <div class="team-info">
                                    <h3>Somto </h3>
                                    <span>I like Online Platforms</span>
@@ -282,7 +281,7 @@
                          </div>
                    
 
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-4">
                               <div class="team-info">
                                    <h3>Andrew </h3>
                                    <span>Learning is fun</span>
@@ -306,7 +305,7 @@
           <div class="container">
                <div class="row">
 
-                    <div class="col-md-12 col-sm-12">
+                    <div class="col-md-12 col-sm-4">
                          <div class="section-title">
                               <h2>General Reviews <small>from friends and Partners </small></h2>
                          </div>

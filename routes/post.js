@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const Post = require('../models/post');
+const { isLoggedIn } = require('../middleware');
 const { cloudinary, storage } = require('../cloudinary');
 const upload = multer({ storage });
 
 //  Post/new route
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
 	res.render('postForm', { title: '', body: '' });
 });
 
@@ -30,7 +31,7 @@ router.get('/', async (req, res) => {
 });
 
 // Post/ route
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/', isLoggedIn, upload.single('image'), async (req, res) => {
 	try {
 		if (req.file) {
 			const { secure_url, public_id } = req.file;
@@ -41,9 +42,11 @@ router.post('/', upload.single('image'), async (req, res) => {
 		req.flash('success', 'post created');
 		res.redirect('/');
 	} catch (error) {
-		const { title, desc } = req.body;
-		req.flash('error', 'please fill in the appropriate fields');
-		res.render('postForm', { title, desc });
+		res.render('postForm', {
+			title: req.body.post.title,
+			desc: req.body.post.desc,
+			error: 'Post Not successful'
+		});
 		console.log(error);
 	}
 });
@@ -58,7 +61,7 @@ router.get('/:id', async (req, res) => {
 					model: 'User'
 				}
 			})
-			.exec();
+			.populate('author');
 		res.render('show', { post });
 	} catch (error) {
 		res.status(400).send('something went wrong');
@@ -66,7 +69,7 @@ router.get('/:id', async (req, res) => {
 	}
 });
 // Edit route/ post/id/edit
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', isLoggedIn, async (req, res) => {
 	try {
 		let post = await Post.findById(req.params.id);
 		res.render('edit', { post });
@@ -76,7 +79,7 @@ router.get('/:id/edit', async (req, res) => {
 });
 
 //Update route/ post/id
-router.put('/:id', upload.single('image'), async (req, res) => {
+router.put('/:id', isLoggedIn, upload.single('image'), async (req, res) => {
 	try {
 		let post = await Post.findById(req.params.id);
 		if (req.file) {
@@ -101,7 +104,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
 });
 
 // Delete route
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', isLoggedIn, async (req, res) => {
 	try {
 		let post = await Post.findById(req.params.id);
 		if (post.image.public_id) {

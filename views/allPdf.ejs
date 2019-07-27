@@ -1,16 +1,12 @@
 <% include ./partials/header  %>
-<h1> All posts </h1>
 
 <div class="container">
+     <h3>Click To Download </h3><br />
   <div class="row">
       <% pdfs.docs.forEach(function(post) { %>
         <div class="col-md-4 col-sm-4">
             <div class="item">
-                      <div class="courses-top">
-                           <div class="courses-date">
                                 <span><i class="fa fa-calendar"></i> <%=  post.created.toDateString()  %></span>
-                           </div>
-                      </div>
                       <div class="courses-detail">
                            <h3><a href="/postPdf/<%= post.id %>/pdf" ><%=  post.title  %></a></h3>
                       </div>

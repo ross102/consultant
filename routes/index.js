@@ -25,28 +25,31 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
 	// pass error messages
 	if (req.body.username.length < 4 || req.body.password.length < 4) {
-		req.flash('error', 'username and password should be more than four characters');
 		//	render the form with input fields filled
 		res.render('user/register', {
 			username: req.body.username,
-			email: req.body.email
+			email: req.body.email,
+			error: 'please username and password should be more than four characters'
 		});
 	} else {
-		try {
-			// Check if email already exists in db
-			const foundEmail = await User.findOne({ email: req.body.email });
-			if (foundEmail) {
-				req.flash('error', 'username already exists');
-			}
-			// Check if username already exists in db
-			const foundUser = await User.findOne({ username: req.body.username });
-			if (foundUser) {
-				req.flash('error', 'username already exists');
-			}
-		} catch (err) {
-			req.flash('error', err.message);
+		// Check if email already exists in db
+		const foundEmail = await User.findOne({ email: req.body.email });
+		if (foundEmail.length > 1) {
+			res.render('user/register', {
+				username: req.body.username,
+				email: req.body.email,
+				error: 'Email already exists'
+			});
 		}
-
+		// Check if username already exists in db
+		const foundUser = await User.findOne({ username: req.body.username });
+		if (foundUser.length > 1) {
+			res.render('user/register', {
+				username: req.body.username,
+				email: req.body.email,
+				error: 'User already exists'
+			});
+		}
 		// set Admin
 		if (req.body.password === process.env.Admin) {
 			req.body.isAdmin = true;

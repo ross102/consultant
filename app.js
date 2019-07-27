@@ -14,8 +14,8 @@ const commentRouter = require('./routes/comments');
 const postPdfRouter = require('./routes/postPdf');
 const postBusRouter = require('./routes/postBus');
 const buscommentRouter = require('./routes/buscomments');
-const sendMailRouter = require('./routes/mail');
 const paymentRouter = require('./routes/payment');
+const mailRouter = require('./routes/mail');
 
 const app = express();
 
@@ -74,8 +74,8 @@ app.use('/post/:id/comments', commentRouter);
 app.use('/postPdf', postPdfRouter);
 app.use('/postBus', postBusRouter);
 app.use('/postBus/:id/comments', buscommentRouter);
-app.use('/subscribe', sendMailRouter);
 app.use('/paystack', paymentRouter);
+app.use('/subscribe', mailRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

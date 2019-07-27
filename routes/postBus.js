@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const { isLoggedIn } = require('../middleware');
 const PostBus = require('../models/postBus');
 const { cloudinary, storage } = require('../cloudinary');
 const upload = multer({ storage });
 
 //  postbus/new route
-router.get('/new', (req, res) => {
-	res.render('postbus/postbusForm', { title: '', body: '' });
+router.get('/new', isLoggedIn, (req, res) => {
+	res.render('postbus/postbusForm');
 });
 
 //postbus/ route
@@ -30,7 +31,7 @@ router.get('/', async (req, res) => {
 });
 
 // postbus/ route
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/', isLoggedIn, upload.single('image'), async (req, res) => {
 	try {
 		if (req.file) {
 			const { secure_url, public_id } = req.file;
@@ -38,25 +39,30 @@ router.post('/', upload.single('image'), async (req, res) => {
 		}
 		req.body.post.author = req.user._id;
 		await PostBus.create(req.body.post);
-		req.flash('success', ' posted ');
+		req.flash('success', ' post Successful');
 		res.redirect('/');
 	} catch (error) {
-		const { title, desc } = req.body;
-		req.flash('error', 'please fill in the fields properly');
-		res.render('postbus/postBusForm', { title, desc });
+		res.render('postbus/postBusForm', {
+			title: req.body.post.title,
+			desc: req.body.post.desc,
+			error: 'Post Not successful'
+		});
 		console.log(error);
 	}
 });
 // Show route/ postbus/id
 router.get('/:id', async (req, res) => {
 	try {
-		let post = await PostBus.findById(req.params.id).populate({
-			path: 'comments',
-			populate: {
-				path: 'author',
-				model: 'User'
-			}
-		});
+		let post = await PostBus.findById(req.params.id)
+			.populate({
+				path: 'comments',
+				populate: {
+					path: 'author',
+					model: 'User'
+				}
+			})
+			.populate('author');
+		console.log(post);
 		res.render('postbus/show', { post });
 	} catch (error) {
 		res.status(400).send('something went wrong');
@@ -64,7 +70,7 @@ router.get('/:id', async (req, res) => {
 	}
 });
 // Edit route/ postbus/id/edit
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', isLoggedIn, async (req, res) => {
 	try {
 		let post = await PostBus.findById(req.params.id);
 		res.render('postbus/edit', { post });
@@ -74,16 +80,17 @@ router.get('/:id/edit', async (req, res) => {
 });
 
 //Update route/ postbus/id
-router.put('/:id', upload.single('image'), async (req, res) => {
+router.put('/:id', isLoggedIn, upload.single('image'), async (req, res) => {
 	try {
 		let post = await PostBus.findById(req.params.id);
 		if (req.file) {
 			if (post.image.public_id) {
 				await cloudinary.v2.uploader.destroy(post.image.public_id);
-				post.image = null;
+				const { secure_url, public_id } = req.file;
+				req.body.post.image = { secure_url, public_id };
 			}
-			const { secure_url, public_id } = req.file;
-			post.image = { secure_url, public_id };
+
+			post.image = req.body.post.image;
 
 			// save post to database
 			post.title = req.body.post.title;
@@ -99,7 +106,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
 });
 
 // Delete route
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', isLoggedIn, async (req, res) => {
 	try {
 		let post = await PostBus.findById(req.params.id);
 		if (post.image.public_id) {

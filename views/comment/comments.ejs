@@ -5,12 +5,10 @@
   <div class="row">
          <div class="col-md-6 col-sm-4">
               <form  action="/post/<%= post.id %>/comments" method="POST">
-                  
-             <label for="">Comment </label>	
-                  <textarea  class="form-control" name="comment[text]" cols="5" rows="10"><%= post.desc %></textarea>
+               <input type="submit" value="Comment" id="reg" class="btn btn-primary"><br />
+                  <textarea  class="form-control" name="comment[text]" cols="5" rows="10"></textarea>
                   </div>
                   <!-- <p class="help-block">Example block-level help text here.</p> -->
-                  <input type="submit" value="Comment" class="btn btn-primary">
               </form>
          </div> 
   </div>

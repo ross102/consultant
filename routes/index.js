@@ -34,7 +34,7 @@ router.post('/register', async (req, res) => {
 	} else {
 		// Check if email already exists in db
 		const foundEmail = await User.findOne({ email: req.body.email });
-		if (foundEmail.length > 1) {
+		if (foundEmail) {
 			res.render('user/register', {
 				username: req.body.username,
 				email: req.body.email,
@@ -43,7 +43,7 @@ router.post('/register', async (req, res) => {
 		}
 		// Check if username already exists in db
 		const foundUser = await User.findOne({ username: req.body.username });
-		if (foundUser.length > 1) {
+		if (foundUser) {
 			res.render('user/register', {
 				username: req.body.username,
 				email: req.body.email,

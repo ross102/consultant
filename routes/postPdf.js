@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
 				limit: 10,
 				sort: '-_id'
 			}
-		).populate('author');
+		);
 		res.render('allPdf', { pdfs });
 	} catch (error) {
 		res.status(400).send('something went wrong');

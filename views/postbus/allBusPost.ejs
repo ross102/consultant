@@ -1,0 +1,40 @@
+<% include ../partials/header  %>
+
+
+<div class="container">
+          <h3> Choose A Business </h3><br />
+  <div class="row">
+      <% posts.docs.forEach(function(post) { %>
+      <div class="col-md-4 col-sm-4">
+              
+          <div class="item">
+               <div class="courses-thumb">
+                    <div class="courses-top">
+                         <div class="courses-image">
+                              <img src="<%= post.image.secure_url %>" id="imag-size" class="img-responsive" alt="">
+                         </div>
+                         <div class="courses-date">
+                              <span><i class="fa fa-calendar"></i> <%=  post.created.toDateString()  %></span>
+                         </div>
+                    </div>
+                    <div class="courses-detail">
+                         <h3><a href="#"><%=  post.title      %></a></h3>
+                         <p><%=  post.desc.substring(0, 110)     %><a href="/postBus/<%= post.id %>">Read more</a> </p>
+                    </div>
+                    <div class="courses-info">
+                         <div class="courses-author">
+                              <img src="images/author-image1.jpg" class="img-responsive" alt="">
+                              <span>posted by <%=  post.author.username   %></span>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <%  }) %>
+  </div>
+</div>
+
+
+
+<% include ../partials/paginatePost  %>
+<% include ../partials/footer  %>

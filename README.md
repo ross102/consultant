@@ -4,5 +4,5 @@
 
 <h4> used expressjs, nodejs and mongodb </h4>
 
-<p>performed crud operations with cloudinary api.  can upload and download different file type eg docx or pdf.
-only used cloudinary for images mostly.</p>
+<p>performed crud operations with cloudinary api. </p>
+<p> worked with paystack api </p>
